@@ -51,9 +51,9 @@ public class RsaSHA256Verifier implements Verifier {
    * @see net.oauth.jsontoken.crypto.Verifier#verifySignature(byte[], byte[])
    */
   @Override
-  public void verifySignature(byte[] source, byte[] signature) throws SignatureException {
+  public synchronized void verifySignature(byte[] source, byte[] signature) throws SignatureException {
     try {
-      signer.initVerify(verificationKey);
+        signer.initVerify(verificationKey);            
     } catch (InvalidKeyException e) {
       throw new RuntimeException("key someone become invalid since calling the constructor");
     }
